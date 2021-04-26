@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
+import ContactList from "./components/ContactList";
+import Detail from "./components/Detail";
+import ContactState from "./context/ContactState";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    return (
+        <ContactState>
+            <div className="container mt-3">
+                <BrowserRouter>
+                    <Switch>
+                        <Route path="/" exact component={ContactList} />
+                        <Route path="/detail/:index" component={Detail} />
+                        <Redirect to="/" />
+                    </Switch>
+                </BrowserRouter>
+            </div>
+        </ContactState>
+    );
+};
+
 
 export default App;
